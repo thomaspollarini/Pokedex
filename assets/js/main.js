@@ -13,7 +13,7 @@ function getScreenPokemonLimit(){
 }
 
 function convertPokemonToLi(pokemon) {
-return `<li class="pokemon">
+return `<li class="pokemon ${pokemon.type}">
             <span class="pokemon__number">#${pokemon.number.toString().padStart(3, '0')}</span>
             <span class="pokemon__name">${pokemon.name}</span>
             <div class="pokemon__detail">
