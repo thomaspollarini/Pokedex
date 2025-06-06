@@ -125,10 +125,10 @@ function showPokemonDetail(pokemonNumber) {
 
   pokeApi.getPokemons(pokemonNumber - 1, 1).then((pokemon = []) => {
     contentDetails.innerHTML = pokemon.map(convertPokemonToDetail);
+    content.classList.remove("selected");
+    contentDetails.classList.add("selected");
   });
 
-  content.classList.remove("selected");
-  contentDetails.classList.add("selected");
 }
 
 function returnToPokedex() {
