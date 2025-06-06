@@ -50,5 +50,5 @@ loadPokemonItems(offset, limit);
 
 loadMoreButton.addEventListener("click", () => {
 offset += limit;
-  loadPokemonItems(offset);
+  loadPokemonItems(offset, limit);
 });
