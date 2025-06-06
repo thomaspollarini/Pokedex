@@ -38,6 +38,7 @@
   border-radius: 1rem;
   text-align: center;
   font-size: 0.625rem;
+  text-transform: capitalize;
 }
 
 .content .pokemon__detail img {
