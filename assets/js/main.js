@@ -35,7 +35,6 @@ function convertPokemonToLi(pokemon) {
 }
 
 function convertPokemonToDetail(pokemon) {
-  console.log(pokemon);
   return `<div class="${pokemon.type}">
         <div class="details__header">
             <button onclick="returnToPokedex()"><i class="fas fa-arrow-left"></i></button>
@@ -125,7 +124,6 @@ function showPokemonDetail(pokemonNumber) {
   const contentDetails = document.querySelector(".content__details");
 
   pokeApi.getPokemons(pokemonNumber - 1, 1).then((pokemon = []) => {
-    console.log(pokemon[0]);
     contentDetails.innerHTML = pokemon.map(convertPokemonToDetail);
   });
 
