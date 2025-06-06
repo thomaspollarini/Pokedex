@@ -11,6 +11,7 @@
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .content .pokemon__number {
