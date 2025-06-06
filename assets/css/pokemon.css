@@ -23,6 +23,7 @@
   font-weight: 500;
   font-size: 1.25rem;
   margin-bottom: 0.25em;
+  text-transform: capitalize;
 }
 
 .pokemon__detail {
