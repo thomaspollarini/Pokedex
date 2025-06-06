@@ -3,6 +3,7 @@
   --button-color: #6c79db;
 }
 
+/* POKEMON DETAILS */
 .content__details .details__header {
   display: flex;
   flex-direction: row;
@@ -60,6 +61,8 @@
   align-self: center;
 }
 
+
+/* POKEMON INFORMATION */
 .content__details .pokemon__info-Container {
     padding-top: 1rem;
     background-color: white;

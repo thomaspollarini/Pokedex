@@ -18,7 +18,7 @@
     <title>Pokedex</title>
   </head>
   <body>
-    <section class="content">
+    <section class="content selected">
       <h1>Pokedex</h1>
 
       <ol class="pokemons"></ol>
@@ -28,71 +28,6 @@
     </section>
 
     <section class="content__details">
-      <div class="grass">
-        <div class="details__header">
-            <button><i class="fas fa-arrow-left"></i></button>
-            <button><i class="far fa-heart"></i></button>
-        </div>
-        <div class="pokemon__detail">
-          <span class="pokemon__name">Bulbasaur</span>
-          <span class="pokemon__number">#001</span>
-          <ol class="pokemon__types grass">
-            <li class="pokemon__type">Grass</li>
-            <li class="pokemon__type">Poison</li>
-          </ol>
-          <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-            alt="Bulbasaur"
-          />
-        </div>
-        <div class="pokemon__info-Container">
-          <ul class="info__tabs">
-            <li>
-              <button class="info-Button selected">About</button>
-            </li>
-            <li ><button class="info-Button">Base Stats</button></li>
-            <li><button class="info-Button">Evolution</button></li>
-            <li><button class="info-Button">Moves</button></li>
-          </ul>
-          <div class="info selected">
-            <table class="info__table">
-              <tr>
-                <th scope="row">Species</th>
-                <td>Seed</td>
-              </tr>
-              <tr>
-                <th scope="row">Height</th>
-                <td>0.7 m</td>
-              </tr>
-              <tr>
-                <th scope="row">Weight</th>
-                <td>6.9 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">Abilities</th>
-                <td colspan="2">Overgrow, Chlorophyll</td>
-              </tr>
-
-              <th class="info__title">
-                Breeding
-              </th>
-              <tr>
-                <th scope="row">Gender</th>
-                <td><i class="fas fa-mars" style="color: blue;"></i> 87.5%</td>
-                <td><i class="fas fa-venus" style="color: pink;"></i> 12.5%</td>
-              </tr>
-              <tr>
-                <th scope="row">Egg Groups</th>
-                <td colspan="2">Monster, Grass</td>
-              </tr>
-              <tr>
-                <th scope="row">Egg Cycle</th>
-                <td colspan="2">20 cycles</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
     </section>
 
     <script src="/assets/js/pokemon-model.js"></script>

@@ -22,15 +22,24 @@ ol, ul {
 }
 
 .content {
+  display: none;
   padding: 1rem;
   background-color: white;
   height: 100svh;
+}
+
+.content.selected {
+  display: block;
 }
 
 .content__details {
   display: none;
   height: 100svh;
   background-color: white;
+}
+
+.content__details.selected {
+  display: block;
 }
 
 .pagination {
