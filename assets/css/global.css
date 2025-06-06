@@ -3,6 +3,7 @@
 
 :root {
     --background-color: #f6f8fc;
+    --button-color: #6c79db;
 }
 
 * {
@@ -24,6 +25,23 @@ ol {
   padding: 1rem;
   background-color: white;
   height: 100svh;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.load-more {
+background-color: var(--button-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius:1rem;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 992px) {
