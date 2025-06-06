@@ -2,14 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-:root {
-  --background-color: #f6f8fc;
-  --type-grass-color: #49D0B0;
-  --type-grass-color-light: #61e1ca;
-
-}
-
-
 * {
   margin: 0;
   padding: 0;

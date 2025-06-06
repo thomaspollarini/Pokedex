@@ -1,12 +1,53 @@
+
+ 
+
+:root {
+  --background-color: #f6f8fc;
+  --grass-type-color: #49d0b0;
+  --grass-type-color-light: #61e1ca;
+  --fire-type-color: #fc6c6d;
+  --fire-type-color-light: #f68e8a;
+  --water-type-color: #76befe;
+  --water-type-color-light: #91d2fe;
+  --eletric-type-color: #ffd76f;
+  --eletric-type-color-light: #ffe67e;
+  --normal-type-color: #a8a77a;
+  --normal-type-color-light: #c0c09a;
+  --fighting-type-color: #c22e28;
+  --fighting-type-color-light: #d34a46;
+  --poison-type-color: #a33ea1;
+  --poison-type-color-light: #b85fc0;
+  --ground-type-color: #e2bf65;
+  --ground-type-color-light: #e8d08a;
+  --flying-type-color: #a98ff3;
+  --flying-type-color-light: #b7a0f5;
+  --psychic-type-color: #f95587;
+  --psychic-type-color-light: #f97fa0;
+  --bug-type-color: #a6b91a;
+  --bug-type-color-light: #b8c33a;
+  --rock-type-color: #b6a136;
+  --rock-type-color-light: #c1b44a;
+  --ghost-type-color: #735797;
+  --ghost-type-color-light: #8a6cb0;
+  --dragon-type-color: #6f35fc;
+  --dragon-type-color-light: #7f5bff;
+  --dark-type-color: #705746;
+  --dark-type-color-light: #7f6a5b;
+  --steel-type-color: #b7b7ce;
+  --steel-type-color-light: #c9c9d8;
+  --fairy-type-color: #d685ad;
+  --fairy-type-color-light: #e0a2c1;
+}
+
 .pokemons {
   display: grid;
   grid-template-columns: 1fr;
 }
 
 .pokemon {
-  margin: .5rem;
-  padding: 1rem .5rem 0;
-  background-color: var(--type-grass-color);
+  margin: 0.5rem;
+  padding: 1rem 0.5rem 0;
+  background-color: var(--eletric-type-color);
   color: white;
   border-radius: 1rem;
   display: flex;
@@ -22,7 +63,7 @@
 .pokemon__name {
   font-weight: 500;
   font-size: 1.25rem;
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
 }
 
 .pokemon__detail {
@@ -32,15 +73,15 @@
 }
 
 .pokemon__type {
-  margin: .25rem 0;
-  padding: 0.25rem .5rem;
-  background-color: var(--type-grass-color-light);
+  margin: 0.25rem 0;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--eletric-type-color-light);
   border-radius: 1rem;
   text-align: center;
-  font-size: .625rem;
+  font-size: 0.625rem;
 }
 
-.pokemon__detail img{
+.pokemon__detail img {
   max-width: 100%;
   height: 100px;
   border-style: none;
