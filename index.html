@@ -1,32 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/assets/css/global.css">
-    <link rel="stylesheet" href="/assets/css/pokemon.css">
-    <link rel="stylesheet" href="/assets/css/pokemon-background.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/assets/css/global.css" />
+    <link rel="stylesheet" href="/assets/css/pokemon.css" />
+    <link rel="stylesheet" href="/assets/css/pokemon-details.css" />
+    <link rel="stylesheet" href="/assets/css/pokemon-background.css" />
     <title>Pokedex</title>
-</head>
-<body>
+  </head>
+  <body>
     <section class="content">
-        <h1>
-            Pokedex
-        </h1>
+      <h1>Pokedex</h1>
 
-        <ol class="pokemons">
-        </ol>
-        <div class="pagination">
-            <button class="load-more">
-                ver mais
-            </button>
-        </div>
+      <ol class="pokemons"></ol>
+      <div class="pagination">
+        <button class="load-more">ver mais</button>
+      </div>
     </section>
 
+    <section class="content__details">
+      <div class="grass">
+        <div class="details__header">
+            <button><i class="fas fa-arrow-left"></i></button>
+            <button><i class="far fa-heart"></i></button>
+        </div>
+        <div class="pokemon__detail">
+          <span class="pokemon__name">Bulbasaur</span>
+          <span class="pokemon__number">#001</span>
+          <ol class="pokemon__types grass">
+            <li class="pokemon__type">Grass</li>
+            <li class="pokemon__type">Poison</li>
+          </ol>
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+            alt="Bulbasaur"
+          />
+        </div>
+        <div class="pokemon__info-Container">
+          <ul class="info__tabs">
+            <li>
+              <button class="info-Button selected">About</button>
+            </li>
+            <li ><button class="info-Button">Base Stats</button></li>
+            <li><button class="info-Button">Evolution</button></li>
+            <li><button class="info-Button">Moves</button></li>
+          </ul>
+          <div class="info selected">
+            <table class="info__table">
+              <tr>
+                <th scope="row">Species</th>
+                <td>Seed</td>
+              </tr>
+              <tr>
+                <th scope="row">Height</th>
+                <td>0.7 m</td>
+              </tr>
+              <tr>
+                <th scope="row">Weight</th>
+                <td>6.9 kg</td>
+              </tr>
+              <tr>
+                <th scope="row">Abilities</th>
+                <td colspan="2">Overgrow, Chlorophyll</td>
+              </tr>
+
+              <th class="info__title">
+                Breeding
+              </th>
+              <tr>
+                <th scope="row">Gender</th>
+                <td><i class="fas fa-mars" style="color: blue;"></i> 87.5%</td>
+                <td><i class="fas fa-venus" style="color: pink;"></i> 12.5%</td>
+              </tr>
+              <tr>
+                <th scope="row">Egg Groups</th>
+                <td colspan="2">Monster, Grass</td>
+              </tr>
+              <tr>
+                <th scope="row">Egg Cycle</th>
+                <td colspan="2">20 cycles</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <script src="/assets/js/pokemon-model.js"></script>
     <script src="/assets/js/poke-api.js"></script>
     <script src="/assets/js/main.js"></script>
-</body>
+  </body>
 </html>

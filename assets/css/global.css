@@ -17,7 +17,7 @@ body {
   background-color: var(--background-color);
 }
 
-ol {
+ol, ul {
   list-style: none;
 }
 
@@ -25,6 +25,12 @@ ol {
   padding: 1rem;
   background-color: white;
   height: 100svh;
+}
+
+.content__details {
+  display: none;
+  height: 100svh;
+  background-color: white;
 }
 
 .pagination {
@@ -50,6 +56,13 @@ background-color: var(--button-color);
     height: auto;
     margin: auto;
     border-radius: 1rem;
-  }
-  
+  } 
+
+  .content__details {
+    max-width: 992px;
+    height: auto;
+    margin: 1rem auto;
+    border-radius: 1rem;
+    overflow: hidden;
+  } 
 }
