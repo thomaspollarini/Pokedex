@@ -7,22 +7,22 @@ function convertPokeApiDetailToPokemon(pokemonDetail) {
   pokemon.types = pokemonDetail.types.map((typeSlot) => typeSlot.type.name);
   pokemon.type = pokemon.types[0];
   pokemon.image = pokemonDetail.sprites.other["official-artwork"].front_default;
-  pokemon.abalities = pokemonDetail.abilities.map(
+  pokemon.abilities = pokemonDetail.abilities.map(
     (abilitySlot) => abilitySlot.ability.name
   );
   pokemon.height = pokemonDetail.height / 10; // Convert to meters
   pokemon.weight = pokemonDetail.weight / 10; // Convert to kilograms
 
-  pokeApi.getSpeciesDetail(pokemonDetail).then((speciesDetail) => {
-    pokemon.species = speciesDetail.genera[7].genus.replace(" Pokémon", "");
+  
+  return pokeApi.getSpeciesDetail(pokemonDetail).then((speciesDetail) => {
+    pokemon.species = speciesDetail.genera.find(g => g.language.name === "en")?.genus.replace(" Pokémon", "") || "";
     pokemon.gender = speciesDetail.gender_rate;
     pokemon.eggCycle = speciesDetail.hatch_counter;
     pokemon.eggGroups = speciesDetail.egg_groups.map(
       (eggGroup) => eggGroup.name
     );
+    return pokemon;
   });
-
-  return pokemon;
 }
 
 pokeApi.getSpeciesDetail = (pokemon) => {
