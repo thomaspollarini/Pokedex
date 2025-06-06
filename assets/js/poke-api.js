@@ -1,11 +1,23 @@
 const pokeApi = {};
 
+function convertPokeApiDetailToPokemon(pokemonDetail) {
+  const pokemon = new Pokemon();
+  pokemon.number = pokemonDetail.id;
+  pokemon.name = pokemonDetail.name;
+  pokemon.types = pokemonDetail.types.map((typeSlot) => typeSlot.type.name);
+  pokemon.type = pokemon.types[0];
+  pokemon.image = pokemonDetail.sprites.other["official-artwork"].front_default;
+
+  return pokemon;
+}
+
 pokeApi.getPokemonDetail = (pokemon) => {
-    return fetch(pokemon.url).then((response) => response.json())
-} 
+  return fetch(pokemon.url)
+    .then((response) => response.json())
+    .then(convertPokeApiDetailToPokemon);
+};
 
-
-pokeApi.getPokemons = (offset = 0 , limit = 10) => {
+pokeApi.getPokemons = (offset = 0, limit = 10) => {
   const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
   return fetch(url)
@@ -17,5 +29,4 @@ pokeApi.getPokemons = (offset = 0 , limit = 10) => {
       console.error("Error fetching data:", error);
       throw error; // Re-throw the error for further handling if needed
     });
-
 };
