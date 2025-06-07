@@ -123,8 +123,8 @@ function convertPokemonToDetail(pokemon) {
                     <td>${pokemon.specialDefense}</td>
                 </tr>
                 <tr>
-                    <th scope="row">${pokemon.speed}</th>
-                    <td>45</td>
+                    <th scope="row">Speed</th>
+                    <td>${pokemon.speed}</td>
                 </tr>
                 <tr>
                     <th scope="row">Total</th>
