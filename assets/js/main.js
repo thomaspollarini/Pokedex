@@ -123,12 +123,11 @@ function showPokemonDetail(pokemonNumber) {
   const content = document.querySelector(".content");
   const contentDetails = document.querySelector(".content__details");
 
-  pokeApi.getPokemons(pokemonNumber - 1, 1).then((pokemon = []) => {
-    contentDetails.innerHTML = pokemon.map(convertPokemonToDetail);
+  pokeApi.getCompletePokemon(pokemonNumber).then((pokemon = []) => {
+    contentDetails.innerHTML = convertPokemonToDetail(pokemon);
     content.classList.remove("selected");
     contentDetails.classList.add("selected");
   });
-
 }
 
 function returnToPokedex() {

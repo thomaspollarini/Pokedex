@@ -13,22 +13,23 @@ function convertPokeApiDetailToPokemon(pokemonDetail) {
   pokemon.height = pokemonDetail.height / 10; // Convert to meters
   pokemon.weight = pokemonDetail.weight / 10; // Convert to kilograms
 
-  
-  return pokeApi.getSpeciesDetail(pokemonDetail).then((speciesDetail) => {
-    pokemon.species = speciesDetail.genera.find(g => g.language.name === "en")?.genus.replace(" Pokémon", "") || "";
-    pokemon.gender = speciesDetail.gender_rate;
-    pokemon.eggCycle = speciesDetail.hatch_counter;
-    pokemon.eggGroups = speciesDetail.egg_groups.map(
-      (eggGroup) => eggGroup.name
-    );
-    return pokemon;
-  });
+  return pokemon;
 }
 
 pokeApi.getSpeciesDetail = (pokemon) => {
-  return fetch(pokemon.species.url).then((speciesDetail) =>
-    speciesDetail.json()
-  );
+  return fetch(pokemon.species.url)
+    .then((response) => response.json())
+    .then((speciesDetail) => {
+      return {
+        species:
+          speciesDetail.genera
+            .find((g) => g.language.name === "en")
+            ?.genus.replace(" Pokémon", "") || "",
+        gender: speciesDetail.gender_rate,
+        eggCycle: speciesDetail.hatch_counter,
+        eggGroups: speciesDetail.egg_groups.map((eggGroup) => eggGroup.name),
+      };
+    });
 };
 
 pokeApi.getPokemonDetail = (pokemon) => {
@@ -49,4 +50,15 @@ pokeApi.getPokemons = (offset = 0, limit = 10) => {
       console.error("Error fetching data:", error);
       throw error; // Re-throw the error for further handling if needed
     });
+};
+
+pokeApi.getCompletePokemon = async (pokemonNumber) => {
+  const url = `https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`;
+  const response = await fetch(url);
+  const pokemon = await response.json();
+  const pokemonDetail = convertPokeApiDetailToPokemon(pokemon);
+  const speciesDetail = await pokeApi.getSpeciesDetail(pokemon);
+  Object.assign(pokemonDetail, speciesDetail);
+
+  return pokemonDetail;
 };
