@@ -12,4 +12,10 @@ class Pokemon {
     gender;
     eggGroups = [];
     eggCycle;
+    hp;
+    attack;
+    defense;
+    specialAttack;
+    specialDefense;
+    speed;
 }

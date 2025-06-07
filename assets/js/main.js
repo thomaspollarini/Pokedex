@@ -99,6 +99,39 @@ function convertPokemonToDetail(pokemon) {
               </tr>
             </table>
           </div>
+          <div class="info">
+            <table class="info__table">
+                <tr>
+                    <th scope="row">HP</th>
+                    <td>${pokemon.hp}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Attack</th>
+                    <td>${pokemon.attack}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Defense</th>
+                    <td>${pokemon.defense}</td>
+                    
+                </tr>
+                <tr>
+                    <th scope="row">Sp. Atk</th>
+                    <td>${pokemon.specialAttack}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Sp. Def</th>
+                    <td>${pokemon.specialDefense}</td>
+                </tr>
+                <tr>
+                    <th scope="row">${pokemon.speed}</th>
+                    <td>45</td>
+                </tr>
+                <tr>
+                    <th scope="row">Total</th>
+                    <td>${calculatePokemonTotalStats(pokemon)}</td>
+                </tr>
+            </table>
+        </div>
         </div>
       </div>`;
 }
@@ -106,8 +139,21 @@ function convertPokemonToDetail(pokemon) {
 function calculatePokemonGenderRate(genderRate) {
   return genderRate === -1
     ? `<td colspan="2"> Gender Unknown </td>`
-    : `<td><i class="fas fa-mars" style="color: blue;"></i> ${(1 - genderRate/8)*100}%</td>
-    <td><i class="fas fa-venus" style="color: pink;"></i> ${(genderRate/8)*100}%</td>`;
+    : `<td><i class="fas fa-mars" style="color: blue;"></i> ${
+        (1 - genderRate / 8) * 100
+      }%</td>
+    <td><i class="fas fa-venus" style="color: pink;"></i> ${
+      (genderRate / 8) * 100
+    }%</td>`;
+}
+
+function calculatePokemonTotalStats(pokemon) {
+    return (pokemon.hp +
+        pokemon.attack +
+        pokemon.defense +
+        pokemon.specialAttack +
+        pokemon.specialDefense +
+        pokemon.speed);
 }
 
 function loadPokemonItems(offset, limit) {
@@ -125,6 +171,7 @@ function showPokemonDetail(pokemonNumber) {
 
   pokeApi.getCompletePokemon(pokemonNumber).then((pokemon = []) => {
     contentDetails.innerHTML = convertPokemonToDetail(pokemon);
+    addInfoButtonListeners(); // Adiciona listeners após atualizar o HTML
     content.classList.remove("selected");
     contentDetails.classList.add("selected");
   });
@@ -136,6 +183,30 @@ function returnToPokedex() {
 
   contentDetails.classList.remove("selected");
   content.classList.add("selected");
+}
+
+function addInfoButtonListeners() {
+  const infoButtons = document.querySelectorAll(".info-Button");
+  const infoSections = document.querySelectorAll(".info");
+  console.log(infoSections);
+  infoButtons.forEach((button, index) =>
+    button.addEventListener("click", () => {
+      if (!button.classList.contains("selected")) {
+        const infoButtonSelected = document.querySelector(
+          ".info-Button.selected"
+        );
+        if (infoButtonSelected) {
+          infoButtonSelected.classList.remove("selected");
+        }
+        button.classList.add("selected");
+        const infoSectionSelected = document.querySelector(".info.selected");
+        if (infoSectionSelected) {
+          infoSectionSelected.classList.remove("selected");
+        }
+        infoSections[index].classList.add("selected");
+      }
+    })
+  );
 }
 
 const pokedexList = document.querySelector(".pokemons");

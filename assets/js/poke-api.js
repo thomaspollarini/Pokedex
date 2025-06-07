@@ -7,13 +7,32 @@ function convertPokeApiDetailToPokemon(pokemonDetail) {
   pokemon.types = pokemonDetail.types.map((typeSlot) => typeSlot.type.name);
   pokemon.type = pokemon.types[0];
   pokemon.image = pokemonDetail.sprites.other["official-artwork"].front_default;
-  pokemon.abilities = pokemonDetail.abilities.map(
-    (abilitySlot) => abilitySlot.ability.name
-  );
-  pokemon.height = pokemonDetail.height / 10; // Convert to meters
-  pokemon.weight = pokemonDetail.weight / 10; // Convert to kilograms
 
   return pokemon;
+}
+
+function convertPokeApiStatsDetails(pokemonDetail) {
+  return {
+    height: pokemonDetail.height / 10, // Convert decimetres to metres
+    weight: pokemonDetail.weight / 10, // Convert hectograms to kilograms
+    abilities: pokemonDetail.abilities.map(
+    (abilitySlot) => abilitySlot.ability.name),
+    hp: pokemonDetail.stats.find((stat) => stat.stat.name === "hp").base_stat,
+    attack: pokemonDetail.stats.find(
+      (stat) => stat.stat.name === "attack"
+    ).base_stat,
+    defense: pokemonDetail.stats.find(
+      (stat) => stat.stat.name === "defense"
+    ).base_stat,
+    specialAttack: pokemonDetail.stats.find(
+      (stat) => stat.stat.name === "special-attack"
+    ).base_stat,
+    specialDefense: pokemonDetail.stats.find(
+      (stat) => stat.stat.name === "special-defense"
+    ).base_stat,
+    speed: pokemonDetail.stats.find((stat) => stat.stat.name === "speed")
+      .base_stat,
+  }
 }
 
 pokeApi.getSpeciesDetail = (pokemon) => {
@@ -58,6 +77,7 @@ pokeApi.getCompletePokemon = async (pokemonNumber) => {
   const pokemon = await response.json();
   const pokemonDetail = convertPokeApiDetailToPokemon(pokemon);
   const speciesDetail = await pokeApi.getSpeciesDetail(pokemon);
+  Object.assign(pokemonDetail, convertPokeApiStatsDetails(pokemon));
   Object.assign(pokemonDetail, speciesDetail);
 
   return pokemonDetail;
