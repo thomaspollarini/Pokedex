@@ -188,7 +188,7 @@ function returnToPokedex() {
 function addInfoButtonListeners() {
   const infoButtons = document.querySelectorAll(".info-Button");
   const infoSections = document.querySelectorAll(".info");
-  console.log(infoSections);
+
   infoButtons.forEach((button, index) =>
     button.addEventListener("click", () => {
       if (!button.classList.contains("selected")) {

@@ -18,4 +18,7 @@ class Pokemon {
     specialAttack;
     specialDefense;
     speed;
+    evolutionUrl;
+    evolutionChain;
+    megaEvolution;
 }
