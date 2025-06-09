@@ -207,8 +207,8 @@ function returnEvolutionCondition(evolutionDetails) {
   return evolutionCondition;
 }
 
-pokeApi.getSpeciesDetail = (pokemonNumber) => {
-  const url = `https://pokeapi.co/api/v2/pokemon-species/${pokemonNumber}`;
+pokeApi.getSpeciesDetail = (pokemonId) => {
+  const url = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`;
 
   return fetch(url)
     .then((response) => response.json())
@@ -230,7 +230,7 @@ pokeApi.getSpeciesDetail = (pokemonNumber) => {
     });
 };
 
-pokeApi.getEvolutionChain = (url, pokemonNumber) => {
+pokeApi.getEvolutionChain = (url) => {
   return fetch(url)
     .then((response) => response.json())
     .then((evolutionDetail) => {
@@ -276,13 +276,14 @@ pokeApi.getPokemonDetail = (pokemon) => {
     .then(convertPokeApiDetailToPokemon);
 };
 
-pokeApi.getPokemon = (pokemonNumber) => {
-  const url = `https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`;
+pokeApi.getPokemon = (pokemonId) => {
+  const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
 
   return fetch(url)
     .then((response) => response.json())
     .catch((error) => {
       console.error("Error fetching Pokemon data:", error);
+      return null;
     });
 };
 
@@ -300,16 +301,21 @@ pokeApi.getPokemons = (offset = 0, limit = 10) => {
     });
 };
 
-pokeApi.getCompletePokemon = async (pokemonNumber) => {
-  const pokemon = await pokeApi.getPokemon(pokemonNumber);
+pokeApi.getCompletePokemon = async (pokemonId) => {
+  const pokemon = await pokeApi.getPokemon(pokemonId);
+  if (!pokemon) {
+    return null; // Return null if the Pokemon is not found
+  }
+
   const pokemonDetail = convertPokeApiDetailToPokemon(pokemon);
 
   Object.assign(pokemonDetail, convertPokeApiStatsDetails(pokemon));
-  Object.assign(pokemonDetail, await pokeApi.getSpeciesDetail(pokemonNumber));
+  Object.assign(pokemonDetail, await pokeApi.getSpeciesDetail(pokemonId));
   Object.assign(
     pokemonDetail,
-    await pokeApi.getEvolutionChain(pokemonDetail.evolutionUrl, pokemonNumber)
+    await pokeApi.getEvolutionChain(pokemonDetail.evolutionUrl, pokemonId)
   );
 
   return pokemonDetail;
 };
+
