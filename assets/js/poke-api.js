@@ -31,6 +31,11 @@ function convertPokeApiStatsDetails(pokemonDetail) {
     ).base_stat,
     speed: pokemonDetail.stats.find((stat) => stat.stat.name === "speed")
       .base_stat,
+    moves: pokemonDetail.moves.map((moveSlot) => {
+      return {
+        url: moveSlot.move.url,
+      };
+    }),
   };
 }
 
@@ -59,13 +64,18 @@ function resolveEvolutionChain(chain, pokemonNumber) {
     // Recursively build a flat array of evolution stages
     const currentStage = {
       name: chain.species.name,
-      condition: !chain.evolution_details.length ? "first-stage" : returnEvolutionCondition(chain.evolution_details[0]),
+      condition: !chain.evolution_details.length
+        ? "first-stage"
+        : returnEvolutionCondition(chain.evolution_details[0]),
       image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`,
     };
 
     // If there are multiple evolutions, map each one and flatten the result
     const nextStages = chain.evolves_to.flatMap((nextChain) =>
-      resolveEvolutionChain(nextChain, parseInt(nextChain.species.url.match(/\/(\d+)\//)[1]))
+      resolveEvolutionChain(
+        nextChain,
+        parseInt(nextChain.species.url.match(/\/(\d+)\//)[1])
+      )
     );
 
     return [currentStage, ...nextStages];
@@ -230,7 +240,9 @@ pokeApi.getEvolutionChain = (url, pokemonNumber) => {
         return {
           evolutionChain: resolveEvolutionChain(
             evolutionDetail.chain,
-            parseInt(parseInt(evolutionDetail.chain.species.url.match(/\/(\d+)\//)[1]))
+            parseInt(
+              parseInt(evolutionDetail.chain.species.url.match(/\/(\d+)\//)[1])
+            )
           ),
         };
       }
@@ -238,6 +250,23 @@ pokeApi.getEvolutionChain = (url, pokemonNumber) => {
     .catch((error) => {
       console.error("Error fetching evolution chain:", error);
       return { evolutionChain: null }; // Return null or an empty array if there's an error
+    });
+};
+
+pokeApi.getMoveDetail = (moveUrl) => {
+  return fetch(moveUrl)
+    .then((response) => response.json())
+    .then((moveDetail) => {
+      return {
+        name: moveDetail.name,
+        type: moveDetail.type.name,
+        power: moveDetail.power || "-", // Some moves may not have power
+        pp: moveDetail.pp,
+      };
+    })
+    .catch((error) => {
+      console.error("Error fetching move detail:", error);
+      return null; // Return null or an empty object if there's an error
     });
 };
 

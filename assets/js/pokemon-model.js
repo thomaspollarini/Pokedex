@@ -21,4 +21,5 @@ class Pokemon {
     evolutionUrl;
     evolutionChain;
     megaEvolution;
+    moves;
 }
