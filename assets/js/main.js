@@ -131,9 +131,66 @@ function convertPokemonToDetail(pokemon) {
                     <td>${calculatePokemonTotalStats(pokemon)}</td>
                 </tr>
             </table>
-        </div>
+          </div>
+          <div class="info">
+            <span class="evolution__title">Evolution Chain</span>
+            <div class="evolution__table">
+              ${convertEvolutionChainToTable(pokemon.evolutionChain)}
+            </div>
+            ${convertMegaEvolutionToTable(pokemon)}
+          </div>
         </div>
       </div>`;
+}
+
+function convertEvolutionChainToTable(evolutionChain) {
+    if (!evolutionChain){
+        return `<tr><td colspan="3">No evolutions available</td></tr>`;
+    }else {
+
+        return evolutionChain
+            .slice(0, -1)
+            .map(
+            (evolution, i) => `
+                <div class="evolution__img-name">
+                    <img src="${evolution.image}" alt="${evolution.name}" title="${evolution.name}" />
+                    <span>${evolution.name}</span>
+                </div>
+                <div class="evolution__condition">
+                    <i class="fas fa-arrow-right"></i>
+                    <span>${evolutionChain[i + 1].condition}
+                </div>
+                <div class="evolution__img-name">
+                    <img src="${evolutionChain[i + 1].image}" alt="${evolutionChain[i + 1].name}" title="${evolutionChain[i + 1].name}" />
+                    <span>${evolutionChain[i + 1].name}</span>
+                </div>`
+            )
+            .join("");
+    }
+}
+
+function convertMegaEvolutionToTable(pokemon) {
+    if (!pokemon.megaEvolution) {
+        return "";
+    }else {
+        return `<span class="evolution__title">Mega Evolution</span>
+        <div class="evolution__table">` +
+        pokemon.megaEvolution.map((megaEvolution) => `
+            <div class="evolution__img-name">
+                <img src="${pokemon.image}" alt="${pokemon.name}" title="${pokemon.name}" />
+                <span>${pokemon.name}</span>
+            </div>
+             <div class="evolution__condition">
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Mega Stone</span>
+                </div>
+            <div class="evolution__img-name">
+                <img src="${megaEvolution.image}" alt="${megaEvolution.name}" title="${megaEvolution.name}" />
+                <span>${megaEvolution.name}</span>
+            </div>
+            `).join("") +
+        `</div>`;
+    }
 }
 
 function calculatePokemonGenderRate(genderRate) {
