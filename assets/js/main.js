@@ -144,16 +144,17 @@ function convertPokemonToDetail(pokemon) {
 }
 
 function convertEvolutionChainToTable(evolutionChain) {
-    if (!evolutionChain){
-        return `<tr><td colspan="3">No evolutions available</td></tr>`;
-    }else {
-
-        return evolutionChain
-            .slice(0, -1)
-            .map(
-            (evolution, i) => `
+  if (!evolutionChain) {
+    return `<tr><td colspan="3">No evolutions available</td></tr>`;
+  } else {
+    return evolutionChain
+      .slice(0, -1)
+      .map(
+        (evolution, i) => `
                 <div class="evolution__img-name">
-                    <img src="${evolution.image}" alt="${evolution.name}" title="${evolution.name}" />
+                    <img src="${evolution.image}" alt="${
+          evolution.name
+        }" title="${evolution.name}" />
                     <span>${evolution.name}</span>
                 </div>
                 <div class="evolution__condition">
@@ -161,21 +162,26 @@ function convertEvolutionChainToTable(evolutionChain) {
                     <span>${evolutionChain[i + 1].condition}
                 </div>
                 <div class="evolution__img-name">
-                    <img src="${evolutionChain[i + 1].image}" alt="${evolutionChain[i + 1].name}" title="${evolutionChain[i + 1].name}" />
+                    <img src="${evolutionChain[i + 1].image}" alt="${
+          evolutionChain[i + 1].name
+        }" title="${evolutionChain[i + 1].name}" />
                     <span>${evolutionChain[i + 1].name}</span>
                 </div>`
-            )
-            .join("");
-    }
+      )
+      .join("");
+  }
 }
 
 function convertMegaEvolutionToTable(pokemon) {
-    if (!pokemon.megaEvolution) {
-        return "";
-    }else {
-        return `<span class="evolution__title">Mega Evolution</span>
+  if (!pokemon.megaEvolution) {
+    return "";
+  } else {
+    return (
+      `<span class="evolution__title">Mega Evolution</span>
         <div class="evolution__table">` +
-        pokemon.megaEvolution.map((megaEvolution) => `
+      pokemon.megaEvolution
+        .map(
+          (megaEvolution) => `
             <div class="evolution__img-name">
                 <img src="${pokemon.image}" alt="${pokemon.name}" title="${pokemon.name}" />
                 <span>${pokemon.name}</span>
@@ -188,9 +194,44 @@ function convertMegaEvolutionToTable(pokemon) {
                 <img src="${megaEvolution.image}" alt="${megaEvolution.name}" title="${megaEvolution.name}" />
                 <span>${megaEvolution.name}</span>
             </div>
-            `).join("") +
-        `</div>`;
-    }
+            `
+        )
+        .join("") +
+      `</div>`
+    );
+  }
+}
+
+function convertMovesToHtml(moves) {
+  return `<div class="info">
+                <table class="moves__table">
+                    <thead>
+                        <tr>
+                           <th scope="column">Name</th>
+                           <th scope="column">Type</th>
+                           <th scope="column">Power</th>
+                           <th scope="column">PP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${convertMovesToTable(moves)}
+                    </tbody>
+                </table>
+            </div>`;
+}
+
+function convertMovesToTable(moves) {
+  return moves
+    .map(
+      (move) => `
+        <tr>
+            <td>${move.name}</td>
+            <td><div class=".${move.type}">${move.type}</td>
+            <td>${move.power}</td>
+            <td>${move.pp}</td>
+        </tr>`
+    )
+    .join("");
 }
 
 function calculatePokemonGenderRate(genderRate) {
@@ -205,12 +246,14 @@ function calculatePokemonGenderRate(genderRate) {
 }
 
 function calculatePokemonTotalStats(pokemon) {
-    return (pokemon.hp +
-        pokemon.attack +
-        pokemon.defense +
-        pokemon.specialAttack +
-        pokemon.specialDefense +
-        pokemon.speed);
+  return (
+    pokemon.hp +
+    pokemon.attack +
+    pokemon.defense +
+    pokemon.specialAttack +
+    pokemon.specialDefense +
+    pokemon.speed
+  );
 }
 
 function loadPokemonItems(offset, limit) {
@@ -226,11 +269,19 @@ function showPokemonDetail(pokemonNumber) {
   const content = document.querySelector(".content");
   const contentDetails = document.querySelector(".content__details");
 
-  pokeApi.getCompletePokemon(pokemonNumber).then((pokemon = []) => {
+  pokeApi.getCompletePokemon(pokemonNumber).then(async (pokemon = []) => {
     contentDetails.innerHTML = convertPokemonToDetail(pokemon);
-    addInfoButtonListeners(); // Adiciona listeners após atualizar o HTML
     content.classList.remove("selected");
     contentDetails.classList.add("selected");
+
+    pokemon.moves = await Promise.all(
+      pokemon.moves.map(async (move) => await pokeApi.getMoveDetail(move.url))
+    );
+
+    const infoContainer = document.querySelector(".pokemon__info-Container");
+    infoContainer.innerHTML += convertMovesToHtml(pokemon.moves);
+    addInfoButtonListeners(); // Adiciona listeners após atualizar o HTML
+    console.log(pokemon);
   });
 }
 
