@@ -51,15 +51,15 @@ function getMegaEvolutions(varieties) {
 function resolveEvolutionChain(chain, pokemonNumber) {
   if (!chain.evolves_to.length) {
     return {
-      species: chain.species.name,
-      evolutionCondition: returnEvolutionCondition(chain.evolution_details[0]),
+      name: chain.species.name,
+      condition: returnEvolutionCondition(chain.evolution_details[0]),
       image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`,
     };
   } else {
     // Recursively build a flat array of evolution stages
     const currentStage = {
-      species: chain.species.name,
-      evolutionCondition: !chain.evolution_details.length ? "first-stage" : returnEvolutionCondition(chain.evolution_details[0]),
+      name: chain.species.name,
+      condition: !chain.evolution_details.length ? "first-stage" : returnEvolutionCondition(chain.evolution_details[0]),
       image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`,
     };
 
