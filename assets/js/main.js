@@ -269,20 +269,24 @@ function showPokemonDetail(pokemonNumber) {
   const content = document.querySelector(".content");
   const contentDetails = document.querySelector(".content__details");
 
-  pokeApi.getCompletePokemon(pokemonNumber).then(async (pokemon = []) => {
-    contentDetails.innerHTML = convertPokemonToDetail(pokemon);
-    content.classList.remove("selected");
-    contentDetails.classList.add("selected");
+  pokeApi
+    .getCompletePokemon(pokemonNumber)
+    .then(async (pokemon = []) => {
+      contentDetails.innerHTML = convertPokemonToDetail(pokemon);
+      content.classList.remove("selected");
+      contentDetails.classList.add("selected");
 
-    pokemon.moves = await Promise.all(
-      pokemon.moves.map(async (move) => await pokeApi.getMoveDetail(move.url))
-    );
+      pokemon.moves = await Promise.all(
+        pokemon.moves.map(async (move) => await pokeApi.getMoveDetail(move.url))
+      );
 
-    const infoContainer = document.querySelector(".pokemon__info-Container");
-    infoContainer.innerHTML += convertMovesToHtml(pokemon.moves);
-    addInfoButtonListeners(); // Adiciona listeners após atualizar o HTML
-    console.log(pokemon);
-  });
+      const infoContainer = document.querySelector(".pokemon__info-Container");
+      infoContainer.innerHTML += convertMovesToHtml(pokemon.moves);
+      addInfoButtonListeners(); // Adiciona listeners após atualizar o HTML
+
+      return true;
+    })
+    .catch((error) => alert("Pokémon not found!"));
 }
 
 function returnToPokedex() {
@@ -320,6 +324,7 @@ function addInfoButtonListeners() {
 const pokedexList = document.querySelector(".pokemons");
 const loadMoreButton = document.querySelector(".load-more");
 const limit = getScreenPokemonLimit();
+const searchButton = document.querySelector(".search__button");
 let offset = 0;
 
 loadPokemonItems(offset, limit);
@@ -327,4 +332,10 @@ loadPokemonItems(offset, limit);
 loadMoreButton.addEventListener("click", () => {
   offset += limit;
   loadPokemonItems(offset, limit);
+});
+
+searchButton.addEventListener("click", () => {
+  const searchInput = document.querySelector(".search__input");
+  debugger;
+  showPokemonDetail(searchInput.value);
 });

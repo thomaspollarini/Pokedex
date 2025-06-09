@@ -1,23 +1,24 @@
 /* font Roboto*/
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-    --background-color: #f6f8fc;
-    --button-color: #6c79db;
+  --background-color: #f6f8fc;
+  --button-color: #6c79db;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
   background-color: var(--background-color);
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
@@ -30,6 +31,38 @@ ol, ul {
 
 .content.selected {
   display: block;
+}
+
+.content header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.content .search {
+  padding: 0.2rem;
+  background-color: var(--button-color);
+  border-radius: 1.2rem;
+}
+
+.content .search__input {
+  padding: 0.25rem;
+  margin-left: 0.25rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #f6f8fc;
+  box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.205);
+}
+
+.content .search__button {
+  color: white;
+  background-color: inherit;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  text-align: center;
 }
 
 .content__details {
@@ -51,11 +84,11 @@ ol, ul {
 }
 
 .load-more {
-background-color: var(--button-color);
+  background-color: var(--button-color);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius:1rem;
+  border-radius: 1rem;
   cursor: pointer;
 }
 
@@ -65,7 +98,7 @@ background-color: var(--button-color);
     height: auto;
     margin: auto;
     border-radius: 1rem;
-  } 
+  }
 
   .content__details {
     max-width: 992px;
@@ -73,5 +106,22 @@ background-color: var(--button-color);
     margin: 1rem auto;
     border-radius: 1rem;
     overflow: hidden;
-  } 
+  }
+
+  .content .search {
+    padding: 0.5rem;
+    background-color: var(--button-color);
+    border-radius: 2rem;
+  }
+
+  .content .search__input {
+    padding: .65rem;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    margin-left: 0;
+  }
+
+  .content .search__button {
+    font-size: 1.5rem;
+  }
 }
