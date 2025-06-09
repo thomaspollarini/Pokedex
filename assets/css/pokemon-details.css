@@ -163,6 +163,7 @@
   width: 100%;
   text-transform: capitalize;
   position: relative;
+  border-collapse: collapse;
 }
 
 .content__details .moves__table th {
