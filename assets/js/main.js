@@ -336,6 +336,5 @@ loadMoreButton.addEventListener("click", () => {
 
 searchButton.addEventListener("click", () => {
   const searchInput = document.querySelector(".search__input");
-  debugger;
   showPokemonDetail(searchInput.value);
 });
