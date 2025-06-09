@@ -226,7 +226,7 @@ function convertMovesToTable(moves) {
       (move) => `
         <tr>
             <td>${move.name}</td>
-            <td><div class=".${move.type}">${move.type}</td>
+            <td><div class="${move.type}">${move.type}</td>
             <td>${move.power}</td>
             <td>${move.pp}</td>
         </tr>`
