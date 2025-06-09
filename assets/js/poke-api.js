@@ -230,7 +230,7 @@ pokeApi.getEvolutionChain = (url, pokemonNumber) => {
         return {
           evolutionChain: resolveEvolutionChain(
             evolutionDetail.chain,
-            pokemonNumber
+            parseInt(parseInt(evolutionDetail.chain.species.url.match(/\/(\d+)\//)[1]))
           ),
         };
       }
