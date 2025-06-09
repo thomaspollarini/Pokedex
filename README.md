@@ -2,6 +2,10 @@
 
 Este projeto é uma **Pokédex interativa**, desenvolvida como prática de desenvolvimento front-end com foco em **JavaScript**, **consumo de APIs**, **manipulação de DOM** e **design responsivo**. Inspirado na famosa enciclopédia digital do universo Pokémon, o projeto oferece uma navegação rica em detalhes e com ótima experiência para o usuário.
 
+> 🎨 O design da Pokédex foi baseado nas criações visuais de **Saepul Nahwan**, disponíveis no [Dribbble](https://dribbble.com/saepulnahwan). Veja as inspirações originais:
+> - [Pokedex App – Tela principal](https://dribbble.com/shots/6540871-Pokedex-App)
+> - [Pokedex App – Tela de detalhes](https://dribbble.com/shots/6545819-Pokedex-App)
+
 ---
 
 ## 🔗 Visualização do projeto
@@ -63,5 +67,5 @@ Ao clicar em um Pokémon, o usuário é redirecionado para uma página de detalh
 
 ---
 
-> 🚀 **Observação:** Este projeto faz parte do meu portfólio como desenvolvedor front-end, demonstrando minha capacidade de integrar dados externos, construir interfaces responsivas e aplicar práticas modernas de JavaScript puro.
+> 🚀 **Observação:** Este projeto faz parte do meu portfólio como desenvolvedor front-end, demonstrando minha capacidade de integrar dados externos, construir interfaces responsivas e aplicar práticas modernas de JavaScript puro. O design do projeto foi baseado
 
